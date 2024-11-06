@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "mccourse",
+	"version": "${version}",
+	"name": "MC Course Mod",
+	"description": "Improvements this mod makes: 9 more dimensions, a boss for every dimension, a few dozen more types of weapons and armour, and it finally gets Herobrine properly removed.",
+	"authors": [
+		"Asher Anderson"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/mccourse/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.asheranderson.mccourse.MCCourseMod"
+		],
+		"fabric-datagen": [
+			"net.asheranderson.mccourse.MCCourseModDataGenerator"
+		],
+		"client": [
+			"net.asheranderson.mccourse.MCCourseModClient"
+		]
+	},
+	"mixins": [
+		"mccourse.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.5",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
