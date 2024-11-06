@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 100.0,
+  "group": "mod_items",
+  "ingredient": {
+    "item": "mccourse:froststeel_ore"
+  },
+  "result": {
+    "id": "mccourse:froststeel"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 140.0,
+  "group": "mod_items",
+  "ingredient": {
+    "item": "mccourse:raw_soulsteel"
+  },
+  "result": {
+    "id": "mccourse:soulsteel"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "values": [
+    "mccourse:adamant",
+    "mccourse:beryllium",
+    "mccourse:bismuth",
+    "mccourse:floodsteel",
+    "mccourse:froststeel",
+    "mccourse:netherite",
+    "mccourse:nullsteel",
+    "minecraft:iron_ingot",
+    "minecraft:dirt",
+    "minecraft:stone",
+    "minecraft:oak_wood",
+    "minecraft:acacia_wood",
+    "minecraft:birch_wood",
+    "minecraft:cherry_wood",
+    "minecraft:dark_oak_wood",
+    "minecraft:jungle_wood",
+    "minecraft:mangrove_wood",
+    "minecraft:spruce_wood"
+  ]
+}

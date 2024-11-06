@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 180.0,
+  "group": "mod_items",
+  "ingredient": {
+    "item": "mccourse:autunite_ore"
+  },
+  "result": {
+    "id": "mccourse:autunite"
+  }
+}

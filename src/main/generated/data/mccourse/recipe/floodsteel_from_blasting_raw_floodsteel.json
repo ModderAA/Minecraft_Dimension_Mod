@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 80.0,
+  "group": "mod_items",
+  "ingredient": {
+    "item": "mccourse:raw_floodsteel"
+  },
+  "result": {
+    "id": "mccourse:floodsteel"
+  }
+}

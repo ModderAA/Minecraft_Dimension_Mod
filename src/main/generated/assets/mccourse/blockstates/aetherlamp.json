@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "on=false": {
+      "model": "mccourse:block/aetherlamp"
+    },
+    "on=true": {
+      "model": "mccourse:block/aetherlamp_on"
+    }
+  }
+}

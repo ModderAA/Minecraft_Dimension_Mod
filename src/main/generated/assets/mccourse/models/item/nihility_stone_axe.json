@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "mccourse:item/nihility_stone_axe"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 60.0,
+  "group": "mod_items",
+  "ingredient": {
+    "item": "mccourse:adamant_ore"
+  },
+  "result": {
+    "id": "mccourse:adamant"
+  }
+}

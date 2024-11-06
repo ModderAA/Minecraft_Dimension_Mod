@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_unstable_soulsteel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "mccourse:raw_unstable_soulsteel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:unstable_soulsteel_from_smelting_raw_unstable_soulsteel"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_unstable_soulsteel"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:unstable_soulsteel_from_smelting_raw_unstable_soulsteel"
+    ]
+  }
+}

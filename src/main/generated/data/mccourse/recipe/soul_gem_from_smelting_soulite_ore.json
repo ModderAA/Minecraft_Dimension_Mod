@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 210.0,
+  "group": "mod_items",
+  "ingredient": {
+    "item": "mccourse:soulite_ore"
+  },
+  "result": {
+    "id": "mccourse:soul_gem"
+  }
+}

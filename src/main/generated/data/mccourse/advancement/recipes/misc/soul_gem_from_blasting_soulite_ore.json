@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_soulite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "mccourse:soulite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:soul_gem_from_blasting_soulite_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_soulite_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:soul_gem_from_blasting_soulite_ore"
+    ]
+  }
+}

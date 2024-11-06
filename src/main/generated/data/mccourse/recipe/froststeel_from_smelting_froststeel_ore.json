@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 100.0,
+  "group": "mod_items",
+  "ingredient": {
+    "item": "mccourse:froststeel_ore"
+  },
+  "result": {
+    "id": "mccourse:froststeel"
+  }
+}

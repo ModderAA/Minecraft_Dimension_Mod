@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "mccourse:soul_gem_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "mccourse:soul_gem"
+  }
+}

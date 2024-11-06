@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 30.0,
+  "group": "mod_items",
+  "ingredient": {
+    "item": "mccourse:fire_opal_ore"
+  },
+  "result": {
+    "id": "mccourse:fire_opal"
+  }
+}

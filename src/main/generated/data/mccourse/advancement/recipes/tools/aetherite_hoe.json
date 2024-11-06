@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_aetherite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "mccourse:aetherite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mccourse:aetherite_hoe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_aetherite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mccourse:aetherite_hoe"
+    ]
+  }
+}

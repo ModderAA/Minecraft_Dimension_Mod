@@ -1,0 +1,18 @@
+// 1.21.1	2024-11-05T20:03:56.9755838	MC Course Mod/Tags for minecraft:block
+01531d557219d8c520a05861aa40df5f5f5d9182 data\mccourse\tags\block\needs_voidite_tool.json
+3c882b1bcfc65317d0ab990915f6963c7c2739ff data\mccourse\tags\block\needs_netherite_tool.json
+61846d575f721eb095539cea8445528da4993a8e data\mccourse\tags\block\needs_nihility_stone_tool.json
+092f8cb2ea75b994925ade07e3491aa23e006757 data\mccourse\tags\block\needs_aetherite_tool.json
+e4a2d9ac7499bcd993afecbc091fdddbd9a9f69a data\minecraft\tags\block\dragon_immune.json
+0975fd1a0852bd4ca6e94b197d49dc57255851ce data\minecraft\tags\block\mineable\pickaxe.json
+daf47ffd9dfbfcb3e1046fcd727e801840ac4dd6 data\mccourse\tags\block\needs_fire_opal_tool.json
+109fc0454d41ce769a465b6b75b0366371fc8c8a data\mccourse\tags\block\needs_amber_tool.json
+63ec9c90ad77d49a522d6bec2831f1b2c910c916 data\mccourse\tags\block\needs_adamant_tool.json
+0ddf7a3108b6c6c85d1c5b4681942fe4b0f48756 data\minecraft\tags\block\wither_immune.json
+90cadfc45a73b060efbfdc9c71dda93e63cc1f31 data\mccourse\tags\block\needs_brimstone_tool.json
+52f59cdaab06448632a7ff60638e2c725f924489 data\minecraft\tags\block\walls.json
+e8b5c99ae8b4bd3f733ce2f7df085497563dfba7 data\minecraft\tags\block\needs_diamond_tool.json
+32357f4b4f6eb11ac585bdf937153fec5cd45608 data\minecraft\tags\block\fence_gates.json
+7245fffdfe1d96fc70eb7aa4b7f7a9f7fe2b62b4 data\mccourse\tags\block\needs_obsidian_tool.json
+b63e6549fec0db4f62b2da00df344b61147b5fc4 data\mccourse\tags\block\needs_nullsteel_tool.json
+4e8ea3bcd6047058fea44ebaa3a386d53ff9641e data\minecraft\tags\block\fences.json

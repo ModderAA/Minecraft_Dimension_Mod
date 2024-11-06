@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_frostine_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "mccourse:frostine_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:frostine_from_blasting_frostine_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_frostine_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:frostine_from_blasting_frostine_ore"
+    ]
+  }
+}

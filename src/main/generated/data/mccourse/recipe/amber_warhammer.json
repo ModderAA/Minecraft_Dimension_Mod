@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "mccourse:amber"
+    },
+    "B": {
+      "item": "mccourse:bismuth_block"
+    }
+  },
+  "pattern": [
+    "ABA",
+    " A ",
+    " A "
+  ],
+  "result": {
+    "count": 1,
+    "id": "mccourse:amber_warhammer"
+  }
+}

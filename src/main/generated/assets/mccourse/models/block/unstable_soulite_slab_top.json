@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "mccourse:block/unstable_soul_gem_block",
+    "side": "mccourse:block/unstable_soul_gem_block",
+    "top": "mccourse:block/unstable_soul_gem_block"
+  }
+}

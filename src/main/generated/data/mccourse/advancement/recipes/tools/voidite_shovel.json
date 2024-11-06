@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mccourse:voidite_shovel"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_voidite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "mccourse:voidite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_voidite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mccourse:voidite_shovel"
+    ]
+  }
+}
