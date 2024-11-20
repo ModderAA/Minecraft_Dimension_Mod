@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mccourse:item/leggings_not_found",
+    "layer1": "minecraft:trims/items/leggings_trim_amethyst"
+  }
+}

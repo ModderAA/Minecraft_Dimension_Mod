@@ -2,11 +2,13 @@ package net.asheranderson.mccourse.block;
 
 import net.asheranderson.mccourse.MCCourseMod;
 import net.asheranderson.mccourse.block.custom.Aetherlamp;
+import net.asheranderson.mccourse.block.custom.FlamerootCropBlock;
 import net.asheranderson.mccourse.block.custom.Sculkifier;
 import net.asheranderson.mccourse.block.custom.SoulStabilizer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -474,9 +476,21 @@ public class ModBlocks {
                     .mapColor(MapColor.GOLD)
                     .instrument(NoteBlockInstrument.CHIME)
                     .luminance(state -> state.get(Aetherlamp.ON) ? 15:0 )));
+    public static final Block FLAMEROOT_CROP = registerBlockWithoutBlockItem("flameroot_crop",
+            new FlamerootCropBlock(AbstractBlock.Settings.create().hardness(75)
+                    .mapColor(MapColor.DARK_GREEN)
+                    .noCollision()
+                    .ticksRandomly()
+                    .strength(3f)
+                    .sounds(BlockSoundGroup.CROP)
+                    .pistonBehavior(PistonBehavior.DESTROY)));
 
     private static Block registerBlock(String name, Block block){
         registerBlockItem(name, block);
+        return Registry.register(Registries.BLOCK, Identifier.of(MCCourseMod.MOD_ID, name), block);
+    }
+
+    private static Block registerBlockWithoutBlockItem(String name, Block block){
         return Registry.register(Registries.BLOCK, Identifier.of(MCCourseMod.MOD_ID, name), block);
     }
 

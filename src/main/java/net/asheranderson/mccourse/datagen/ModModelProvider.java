@@ -2,10 +2,12 @@ package net.asheranderson.mccourse.datagen;
 
 import net.asheranderson.mccourse.block.ModBlocks;
 import net.asheranderson.mccourse.block.custom.Aetherlamp;
+import net.asheranderson.mccourse.block.custom.FlamerootCropBlock;
 import net.asheranderson.mccourse.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.*;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 
 public class ModModelProvider extends FabricModelProvider {
@@ -78,6 +80,7 @@ public class ModModelProvider extends FabricModelProvider {
         Identifier lampOnIdentifier = blockStateModelGenerator.createSubModel(ModBlocks.AETHERLAMP, "_on", Models.CUBE_ALL, TextureMap::all);
         blockStateModelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(ModBlocks.AETHERLAMP)
                 .coordinate(BlockStateModelGenerator.createBooleanModelMap(Aetherlamp.ON, lampOnIdentifier, lampOffIdentifier)));
+        blockStateModelGenerator.registerCrop(ModBlocks.FLAMEROOT_CROP, FlamerootCropBlock.AGE, 0, 1, 2, 3, 4, 5, 6);
     }
 
     @Override
@@ -165,5 +168,23 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.AETHERITE_PICKAXE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.AETHERITE_SHOVEL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.AETHERITE_HOE, Models.HANDHELD);
+        itemModelGenerator.registerArmor((ArmorItem) ModItems.NETHERITE_HELMET);
+        itemModelGenerator.registerArmor((ArmorItem) ModItems.NETHERITE_CHESTPLATE);
+        itemModelGenerator.registerArmor((ArmorItem) ModItems.NETHERITE_LEGGINGS);
+        itemModelGenerator.registerArmor((ArmorItem) ModItems.NETHERITE_BOOTS);
+        itemModelGenerator.registerArmor((ArmorItem) ModItems.HELMET_NOT_FOUND);
+        itemModelGenerator.registerArmor((ArmorItem) ModItems.CHESTPLATE_NOT_FOUND);
+        itemModelGenerator.registerArmor((ArmorItem) ModItems.LEGGINGS_NOT_FOUND);
+        itemModelGenerator.registerArmor((ArmorItem) ModItems.BOOTS_NOT_FOUND);
+        itemModelGenerator.register(ModItems.TOOL_NOT_FOUND, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.IRIDIUM, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PERIDOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PHYTOSTEEL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.NETHERITE_HORSE_ARMOR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.NOT_FOUND_HORSE_ARMOR, Models.GENERATED);
+        itemModelGenerator.register(ModItems.GRASS_QUARTZ, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FIRE_SMITHING_TEMPLATE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.FLAMEROOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RAW_FLAMEROOT, Models.GENERATED);
     }
 }

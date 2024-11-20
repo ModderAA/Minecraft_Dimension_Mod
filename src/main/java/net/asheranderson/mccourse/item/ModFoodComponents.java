@@ -5,6 +5,16 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 
 public class ModFoodComponents {
+    public static final FoodComponent RAW_FLAMEROOT = new FoodComponent.Builder()
+            .nutrition(2)
+            .saturationModifier(1f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.INSTANT_DAMAGE, 200), 0.25f)
+            .build();
+    public static final FoodComponent FLAMEROOT = new FoodComponent.Builder()
+            .nutrition(3)
+            .saturationModifier(1.5f)
+            .statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 200), 0.5f)
+            .build();
     public static final FoodComponent UNSTABLE_SOULROOT = new FoodComponent.Builder()
             .nutrition(10)
             .saturationModifier(10f)

@@ -1,8 +1,7 @@
-package net.asheranderson.mccourse.item.custom;
+package net.asheranderson.mccourse.item;
 
 import com.google.common.base.Suppliers;
 import net.asheranderson.mccourse.block.ModBlocks;
-import net.asheranderson.mccourse.item.ModItems;
 import net.asheranderson.mccourse.util.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.item.Items;
@@ -23,7 +22,8 @@ public enum ModToolMaterials implements ToolMaterial {
     FIRE_OPAL(ModTags.Blocks.INCORRECT_FOR_FIRE_OPAL_TOOL, 200000, 160.0F, 80.0F, 100, () -> Ingredient.ofItems(ModItems.FIRE_OPAL)),
     AMBER(ModTags.Blocks.INCORRECT_FOR_AMBER_TOOL, 450000, 175.0F, 85.0F, 117, () -> Ingredient.ofItems(ModBlocks.AMBER)),
     ADAMANT(ModTags.Blocks.INCORRECT_FOR_ADAMANT_TOOL, 750000, 195.0F, 90.0F, 120, () -> Ingredient.ofItems(ModItems.ADAMANT)),
-    AETHERITE(ModTags.Blocks.INCORRECT_FOR_AETHERITE_TOOL, 2000000, 240.0F, 120.0F, 150, () -> Ingredient.ofItems(ModItems.AETHERITE));
+    AETHERITE(ModTags.Blocks.INCORRECT_FOR_AETHERITE_TOOL, 2000000, 240.0F, 120.0F, 150, () -> Ingredient.ofItems(ModItems.AETHERITE)),
+    NOT_FOUND(ModTags.Blocks.INCORRECT_FOR_TOOL_NOT_FOUND, 1000000000, 1000000000, 1000000000, 1000000000, () -> Ingredient.ofItems(ModItems.ITEM_NOT_FOUND));
     private final TagKey<Block> inverseTag;
     private final int itemDurability;
     private final float miningSpeed;

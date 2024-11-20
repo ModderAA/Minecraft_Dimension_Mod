@@ -1,16 +1,18 @@
 package net.asheranderson.mccourse.item;
 import net.asheranderson.mccourse.MCCourseMod;
-import net.asheranderson.mccourse.item.custom.ModToolMaterials;
-import net.asheranderson.mccourse.item.custom.WarhammerItem;
+import net.asheranderson.mccourse.item.custom.*;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
+
+import static net.asheranderson.mccourse.block.ModBlocks.FLAMEROOT_CROP;
 
 public class ModItems {
     public static final Item FIRE_OPAL = registerItem("fire_opal", new Item(new Item.Settings()));
@@ -31,6 +33,10 @@ public class ModItems {
     public static final Item AUTUNITE = registerItem("autunite", new Item(new Item.Settings()));
     public static final Item BERYLLIUM = registerItem("beryllium", new Item(new Item.Settings()));
     public static final Item RAW_BERYLLIUM = registerItem("raw_beryllium", new Item(new Item.Settings()));
+    public static final Item PERIDOT = registerItem("peridot", new Item(new Item.Settings()));
+    public static final Item IRIDIUM = registerItem("iridium", new Item(new Item.Settings()));
+    public static final Item GRASS_QUARTZ = registerItem("grass_quartz", new Item(new Item.Settings()));
+    public static final Item PHYTOSTEEL = registerItem("phytosteel", new Item(new Item.Settings()));
     public static final Item UNSTABLE_SOUL_GEM = registerItem("unstable_soul_gem", new Item(new Item.Settings()));
     public static final Item SOUL_GEM = registerItem("soul_gem", new Item(new Item.Settings()));
     public static final Item UNSTABLE_SOULSTEEL = registerItem("unstable_soulsteel", new Item(new Item.Settings()));
@@ -108,6 +114,46 @@ public class ModItems {
     public static final Item AMBER_HOE = registerHoeItem("amber_hoe", ModToolMaterials.AMBER,  600, 2.1f);
     public static final Item ADAMANT_HOE = registerHoeItem("adamant_hoe", ModToolMaterials.ADAMANT, 1000, 2.2f);
     public static final Item AETHERITE_HOE = registerHoeItem("aetherite_hoe", ModToolMaterials.AETHERITE, 3000, 2.5f);
+    public static final Item TOOL_NOT_FOUND = registerItem("tool_not_found", new GodToolItem(ModToolMaterials.NOT_FOUND, new Item.Settings()
+            .attributeModifiers(MultitoolItem.createAttributeModifiers(ModToolMaterials.NOT_FOUND, 1000000000, 100000000000000000000000000000000000000.0f))));
+    public static final Item NETHERITE_HELMET = registerItem("netherite_helmet",
+            new ModArmorItem(ModArmorMaterials.NETHERITE_ARMOUR_MATERIAL, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(156))));
+    public static final Item NETHERITE_CHESTPLATE = registerItem("netherite_chestplate",
+            new ModArmorItem(ModArmorMaterials.NETHERITE_ARMOUR_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(156))));
+    public static final Item NETHERITE_LEGGINGS = registerItem("netherite_leggings",
+            new ModArmorItem(ModArmorMaterials.NETHERITE_ARMOUR_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(156))));
+    public static final Item NETHERITE_BOOTS = registerItem("netherite_boots",
+            new ModArmorItem(ModArmorMaterials.NETHERITE_ARMOUR_MATERIAL, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(156))));
+    public static final Item HELMET_NOT_FOUND = registerItem("helmet_not_found",
+            new ModArmorItem(ModArmorMaterials.ARMOR_MATERIAL_NOT_FOUND, ArmorItem.Type.HELMET, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.HELMET.getMaxDamage(1000000000))));
+    public static final Item CHESTPLATE_NOT_FOUND = registerItem("chestplate_not_found",
+            new ModArmorItem(ModArmorMaterials.ARMOR_MATERIAL_NOT_FOUND, ArmorItem.Type.CHESTPLATE, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(1000000000))));
+    public static final Item LEGGINGS_NOT_FOUND = registerItem("leggings_not_found",
+            new ModArmorItem(ModArmorMaterials.ARMOR_MATERIAL_NOT_FOUND, ArmorItem.Type.LEGGINGS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(1000000000))));
+    public static final Item BOOTS_NOT_FOUND = registerItem("boots_not_found",
+            new ModArmorItem(ModArmorMaterials.ARMOR_MATERIAL_NOT_FOUND, ArmorItem.Type.BOOTS, new Item.Settings()
+                    .maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(1000000000))));
+    public static final Item ITEM_NOT_FOUND = registerItem("item_not_found", new Item(new Item.Settings()));
+    public static final Item NETHERITE_HORSE_ARMOR = registerItem("netherite_horse_armor",
+            new ModAnimalArmorItem(ModArmorMaterials.NETHERITE_ARMOUR_MATERIAL, AnimalArmorItem.Type.EQUESTRIAN, new Item.Settings()
+                    .maxCount(1)));
+    public static final Item NOT_FOUND_HORSE_ARMOR = registerItem("not_found_horse_armor",
+            new ModAnimalArmorItem(ModArmorMaterials.ARMOR_MATERIAL_NOT_FOUND, AnimalArmorItem.Type.EQUESTRIAN, new Item.Settings()
+                    .maxCount(1)));
+    public static final Item FIRE_SMITHING_TEMPLATE = registerItem("fire_armor_trim_smithing_template",
+            SmithingTemplateItem.of(Identifier.of(MCCourseMod.MOD_ID, "fire"), FeatureFlags.VANILLA));
+    public static final Item BOW_NOT_FOUND = registerItem("bow_not_found",
+            new BowItem(new Item.Settings().maxDamage(1000000000)));
+    public static final Item RAW_FLAMEROOT = registerItem("raw_flameroot", new Item(new Item.Settings().food(ModFoodComponents.RAW_FLAMEROOT)));
+    public static final Item FLAMEROOT = registerItem("flameroot", new Item(new Item.Settings().food(ModFoodComponents.FLAMEROOT)));
+    public static final Item FLAMEROOT_SEEDS = registerItem("flameroot_seeds", new AliasedBlockItem(FLAMEROOT_CROP, new Item.Settings()));
     private static Item registerSwordItem(String name, ToolMaterial toolMaterial, int baseAttackDamage, float attackSpeed){
         return registerItem(name, new SwordItem(toolMaterial, new Item.Settings()
                 .attributeModifiers(SwordItem.createAttributeModifiers(toolMaterial, baseAttackDamage, attackSpeed))));
@@ -154,6 +200,10 @@ public class ModItems {
             entries.add(RAW_BERYLLIUM);
             entries.add(BERYLLIUM);
             entries.add(AUTUNITE);
+            entries.add(IRIDIUM);
+            entries.add(PERIDOT);
+            entries.add(PHYTOSTEEL);
+            entries.add(GRASS_QUARTZ);
             entries.add(RAW_UNSTABLE_SOULSTEEL);
             entries.add(RAW_SOULSTEEL);
             entries.add(UNSTABLE_SOULSTEEL);
@@ -183,6 +233,10 @@ public class ModItems {
             entries.add(AETHERITE_SWORD);
             entries.add(AETHERITE_AXE);
             entries.add(AMBER_WARHAMMER);
+            entries.add(NETHERITE_HELMET);
+            entries.add(NETHERITE_CHESTPLATE);
+            entries.add(NETHERITE_LEGGINGS);
+            entries.add(NETHERITE_BOOTS);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.add(OBSIDIAN_AXE);
@@ -227,12 +281,17 @@ public class ModItems {
             entries.add(AETHERITE_HOE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(entries -> {
+            entries.add(RAW_FLAMEROOT);
+            entries.add(FLAMEROOT);
             entries.add(UNSTABLE_SOULROOT);
             entries.add(SOULROOT);
             entries.add(UNSTABLE_SOUL_BERRY);
             entries.add(SOUL_BERRY);
             entries.add(AMETHYST_SOUL_BERRY);
             entries.add(ENCHANTED_AMETHYST_SOUL_BERRY);
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(entries -> {
+            entries.add(FLAMEROOT_SEEDS);
         });
     }
 }

@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-05T20:03:56.9807251	MC Course Mod/Block Loot Tables
+// 1.21.1	2024-11-17T15:42:26.6238118	MC Course Mod/Block Loot Tables
 9794b841871415998e347491a61f5130b6c6c7fe data\mccourse\loot_table\blocks\soulite_stairs.json
 954c69dd23cb27d106bd9a81a26b87218ddc1672 data\mccourse\loot_table\blocks\fire_opal_block.json
 3e840141296ccebfd9e61f8329c50651bd282f99 data\mccourse\loot_table\blocks\soul_gem_block.json
@@ -36,6 +36,7 @@ f9571196db6a0994f81ce4f0521615fb18acb5cf data\mccourse\loot_table\blocks\soulste
 1a4c4be9ba7d80b1af034274a40a1b51fa00ee8f data\mccourse\loot_table\blocks\unstable_soul_gem_block.json
 4ce29baf585570e2553ac965fcebafcf3a6efe8b data\mccourse\loot_table\blocks\unstable_soulite_fence_gate.json
 75f63a82c7519eba65f6405925c69394a48194e6 data\mccourse\loot_table\blocks\frostine_block.json
+210f2bcecd4483ef156cf656b5188ae36cc42fc1 data\mccourse\loot_table\blocks\flameroot_crop.json
 9ec0077ca5f45e4a329317da7d5efb08eba8654a data\mccourse\loot_table\blocks\soulite_slab.json
 3b65da131a3051cb2c51b5627a0e03ca3f6ab3a3 data\mccourse\loot_table\blocks\soulite_door.json
 edd39ee7637f893110db635f6818678721350f1c data\mccourse\loot_table\blocks\soulite_ore.json

@@ -1,7 +1,7 @@
 package net.asheranderson.mccourse.item.custom;
 
-import net.asheranderson.mccourse.item.ModItems;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
@@ -20,12 +20,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -35,34 +35,99 @@ import net.minecraft.world.WorldEvents;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static net.minecraft.item.MaceItem.createToolComponent;
+
 public class WarhammerItem extends ToolItem {
 
-    public static float MINING_SPEED_MULTIPLIER;
-    public static float KNOCKBACK_RANGE;
-    public static float KNOCKBACK_POWER;
-    public static int ATTACK_DAMAGE_MODIFIER_VALUE;
-    public static float ATTACK_SPEED_MODIFIER_VALUE;
-    public static double PLAYER_RANGE_MODIFIER_VALUE;
-    private final ToolMaterial toolMaterial;
-    public WarhammerItem(ToolMaterial toolMaterial, int ATTACK_DAMAGE_MODIFIER_VALUE,
-                         float ATTACK_SPEED_MODIFIER_VALUE,
-                         double PLAYER_RANGE_MODIFIER_VALUE,
-                         float KNOCKBACK_POWER,
-                         float KNOCKBACK_RANGE,
-                         float MINING_SPEED_MULTIPLIER,
-                         Item.Settings settings) {
-        super(toolMaterial, settings.component(DataComponentTypes.TOOL, createToolComponent()));
-        this.toolMaterial = toolMaterial;
-        this.ATTACK_DAMAGE_MODIFIER_VALUE = ATTACK_DAMAGE_MODIFIER_VALUE;
-        this.ATTACK_SPEED_MODIFIER_VALUE = ATTACK_SPEED_MODIFIER_VALUE;
-        this.PLAYER_RANGE_MODIFIER_VALUE = PLAYER_RANGE_MODIFIER_VALUE;
-        this.KNOCKBACK_POWER = KNOCKBACK_POWER;
-        this.KNOCKBACK_RANGE = KNOCKBACK_RANGE;
-        this.MINING_SPEED_MULTIPLIER = MINING_SPEED_MULTIPLIER;
+    public WarhammerItem(ToolMaterial material, Item.Settings settings, float attackDamage, float attackSpeed, float miningSpeed) {
+        super(material, settings.component(DataComponentTypes.TOOL, createToolComponent()));
     }
-    public static boolean shouldDealAdditionalDamage(LivingEntity attacker) {
-        return attacker.fallDistance > 1.5F && !attacker.isFallFlying();
+    private static ToolComponent createToolComponent() {
+        float miningSpeed = miningSpeed;
+        return new ToolComponent(
+                List.of(ToolComponent.Rule.ofAlwaysDropping(List.of(Blocks.COBWEB), 15.0F), ToolComponent.Rule.of(BlockTags.PICKAXE_MINEABLE, miningSpeed)), 1.0F, 2
+        );
     }
+    public static final float MINING_SPEED_MULTIPLIER = 1.5F;
+    private static final float field_50141 = 5.0F;
+    public static final float KNOCKBACK_RANGE = 3.5F;
+    private static final float KNOCKBACK_POWER = 0.7F;
+
+
+    public static AttributeModifiersComponent createAttributeModifiers() {
+        return AttributeModifiersComponent.builder()
+                .add(
+                        EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                        new EntityAttributeModifier(BASE_ATTACK_DAMAGE_MODIFIER_ID, attackDamage, EntityAttributeModifier.Operation.ADD_VALUE),
+                        AttributeModifierSlot.MAINHAND
+                )
+                .add(
+                        EntityAttributes.GENERIC_ATTACK_SPEED,
+                        new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, attackSpeed, EntityAttributeModifier.Operation.ADD_VALUE),
+                        AttributeModifierSlot.MAINHAND
+                )
+                .build();
+    }
+
+    @Override
+    public int getEnchantability() {
+        return 15;
+    }
+
+    @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (attacker instanceof ServerPlayerEntity serverPlayerEntity && shouldDealAdditionalDamage(serverPlayerEntity)) {
+            ServerWorld serverWorld = (ServerWorld)attacker.getWorld();
+            if (serverPlayerEntity.shouldIgnoreFallDamageFromCurrentExplosion() && serverPlayerEntity.currentExplosionImpactPos != null) {
+                if (serverPlayerEntity.currentExplosionImpactPos.y > serverPlayerEntity.getPos().y) {
+                    serverPlayerEntity.currentExplosionImpactPos = serverPlayerEntity.getPos();
+                }
+            } else {
+                serverPlayerEntity.currentExplosionImpactPos = serverPlayerEntity.getPos();
+            }
+
+            serverPlayerEntity.setIgnoreFallDamageFromCurrentExplosion(true);
+            serverPlayerEntity.setVelocity(serverPlayerEntity.getVelocity().withAxis(Direction.Axis.Y, 0.01F));
+            serverPlayerEntity.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(serverPlayerEntity));
+            if (target.isOnGround()) {
+                serverPlayerEntity.setSpawnExtraParticlesOnFall(true);
+                SoundEvent soundEvent = serverPlayerEntity.fallDistance > 5.0F ? SoundEvents.ITEM_MACE_SMASH_GROUND_HEAVY : SoundEvents.ITEM_MACE_SMASH_GROUND;
+                serverWorld.playSound(
+                        null, serverPlayerEntity.getX(), serverPlayerEntity.getY(), serverPlayerEntity.getZ(), soundEvent, serverPlayerEntity.getSoundCategory(), 1.0F, 1.0F
+                );
+            } else {
+                serverWorld.playSound(
+                        null,
+                        serverPlayerEntity.getX(),
+                        serverPlayerEntity.getY(),
+                        serverPlayerEntity.getZ(),
+                        SoundEvents.ITEM_MACE_SMASH_AIR,
+                        serverPlayerEntity.getSoundCategory(),
+                        1.0F,
+                        1.0F
+                );
+            }
+
+            knockbackNearbyEntities(serverWorld, serverPlayerEntity, target);
+        }
+
+        return true;
+    }
+
+    @Override
+    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damage(1, attacker, EquipmentSlot.MAINHAND);
+        if (shouldDealAdditionalDamage(attacker)) {
+            attacker.onLanding();
+        }
+    }
+
+    @Override
+    public boolean canRepair(ItemStack stack, ItemStack ingredient) {
+        return ingredient.isOf(Items.BREEZE_ROD);
+    }
+
+    @Override
     public float getBonusAttackDamage(Entity target, float baseAttackDamage, DamageSource damageSource) {
         if (damageSource.getSource() instanceof LivingEntity livingEntity) {
             if (!shouldDealAdditionalDamage(livingEntity)) {
@@ -72,12 +137,12 @@ public class WarhammerItem extends ToolItem {
                 float g = 8.0F;
                 float h = livingEntity.fallDistance;
                 float i;
-                if (h <= f) {
+                if (h <= 3.0F) {
                     i = 4.0F * h;
-                } else if (h <= g) {
-                    i = 12.0F + 2.0F * (h - f);
+                } else if (h <= 8.0F) {
+                    i = 12.0F + 2.0F * (h - 3.0F);
                 } else {
-                    i = 22.0F + h - g;
+                    i = 22.0F + h - 8.0F;
                 }
 
                 return livingEntity.getWorld() instanceof ServerWorld serverWorld
@@ -88,20 +153,22 @@ public class WarhammerItem extends ToolItem {
             return 0.0F;
         }
     }
+
     private static void knockbackNearbyEntities(World world, PlayerEntity player, Entity attacked) {
         world.syncWorldEvent(WorldEvents.SMASH_ATTACK, attacked.getSteppingPos(), 750);
-        world.getEntitiesByClass(LivingEntity.class, attacked.getBoundingBox().expand(KNOCKBACK_RANGE), getKnockbackPredicate(player, attacked)).forEach(entity -> {
+        world.getEntitiesByClass(LivingEntity.class, attacked.getBoundingBox().expand(3.5), getKnockbackPredicate(player, attacked)).forEach(entity -> {
             Vec3d vec3d = entity.getPos().subtract(attacked.getPos());
             double d = getKnockback(player, entity, vec3d);
             Vec3d vec3d2 = vec3d.normalize().multiply(d);
             if (d > 0.0) {
-                entity.addVelocity(vec3d2.x, KNOCKBACK_POWER, vec3d2.z);
+                entity.addVelocity(vec3d2.x, 0.7F, vec3d2.z);
                 if (entity instanceof ServerPlayerEntity serverPlayerEntity) {
                     serverPlayerEntity.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(serverPlayerEntity));
                 }
             }
         });
     }
+
     private static Predicate<LivingEntity> getKnockbackPredicate(PlayerEntity player, Entity attacked) {
         return entity -> {
             boolean bl;
@@ -136,53 +203,17 @@ public class WarhammerItem extends ToolItem {
             return bl && bl2 && bl3 && bl4 && bl5 && bl6;
         };
     }
+
     private static double getKnockback(PlayerEntity player, LivingEntity attacked, Vec3d distance) {
-        return (KNOCKBACK_RANGE - distance.length())
-                * KNOCKBACK_POWER
+        return (3.5 - distance.length())
+                * 0.7F
                 * (double)(player.fallDistance > 5.0F ? 2 : 1)
                 * (1.0 - attacked.getAttributeValue(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE));
     }
-    public static final Identifier PLAYER_ENTITY_INTERACTION_RANGE_MODIFIER_ID = Identifier.ofVanilla("player.entity_interaction_range");
-    public static AttributeModifiersComponent createAttributeModifiers(ToolMaterial material, int baseAttackDamage, float attackSpeed, float getBonusAttackDamage) {
-        return AttributeModifiersComponent.builder()
-                .add(
-                        EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                        new EntityAttributeModifier(
-                                BASE_ATTACK_DAMAGE_MODIFIER_ID, (ATTACK_DAMAGE_MODIFIER_VALUE + material.getAttackDamage() + getBonusAttackDamage), EntityAttributeModifier.Operation.ADD_VALUE
-                        ),
-                        AttributeModifierSlot.ANY
-                )
-                .add(
-                        EntityAttributes.GENERIC_ATTACK_SPEED,
-                        new EntityAttributeModifier(BASE_ATTACK_SPEED_MODIFIER_ID, (double)attackSpeed, EntityAttributeModifier.Operation.ADD_VALUE),
-                        AttributeModifierSlot.ANY
-                )
-                .add(
-                        EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE,
-                        new EntityAttributeModifier(PLAYER_ENTITY_INTERACTION_RANGE_MODIFIER_ID, PLAYER_RANGE_MODIFIER_VALUE, EntityAttributeModifier.Operation.ADD_VALUE),
-                        AttributeModifierSlot.ANY
-                )
-                .build();
-    }
-    public static ToolComponent createToolComponent() {
-        return new ToolComponent(List.of(), 1.0F, 2);
-    }
 
-    @Override
-    public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
-        return !miner.isCreative();
+    public static boolean shouldDealAdditionalDamage(LivingEntity attacker) {
+        return attacker.fallDistance > 1.5F && !attacker.isFallFlying();
     }
-
-    @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        return true;
-    }
-
-    @Override
-    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damage(1, attacker, EquipmentSlot.MAINHAND);
-    }
-
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         if(Screen.hasShiftDown()){

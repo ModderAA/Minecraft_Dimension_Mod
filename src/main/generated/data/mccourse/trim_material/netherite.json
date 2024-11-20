@@ -1,0 +1,9 @@
+{
+  "asset_name": "netherite",
+  "description": {
+    "color": "#2E2E2E",
+    "translate": "trim_material.mccourse.netherite"
+  },
+  "ingredient": "mccourse:netherite",
+  "item_model_index": 0.3
+}

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bismuth_block": {
+    "has_amber": {
       "conditions": {
         "items": [
           {
-            "items": "mccourse:bismuth_block"
+            "items": "mccourse:amber"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_bismuth_block"
+      "has_amber"
     ]
   ],
   "rewards": {

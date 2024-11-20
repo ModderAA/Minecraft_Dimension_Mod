@@ -1,0 +1,6 @@
+{
+  "parent": "mccourse:item/bow_not_found",
+  "textures": {
+    "layer0": "mccourse:item/bow_not_found_pulling_1"
+  }
+}

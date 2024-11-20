@@ -29,6 +29,9 @@ public class ModTags {
         public static final TagKey<Block> INCORRECT_FOR_ADAMANT_TOOL = createTag("incorrect_for_adamant_tool");
         public static final TagKey<Block> NEEDS_AETHERITE_TOOL = createTag("needs_aetherite_tool");
         public static final TagKey<Block> INCORRECT_FOR_AETHERITE_TOOL = createTag("incorrect_for_aetherite_tool");
+        public static final TagKey<Block> NEEDS_TOOL_NOT_FOUND = createTag("needs_tool_not_found");
+        public static final TagKey<Block> INCORRECT_FOR_TOOL_NOT_FOUND = createTag("incorrect_for_tool_not_found");
+        public static final TagKey<Block> MULTITOOL_MINEABLE = createTag("multitool_mineable");
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, Identifier.of(MCCourseMod.MOD_ID, name));
         }

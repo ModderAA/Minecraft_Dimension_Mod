@@ -1,0 +1,12 @@
+{
+  "values": [
+    "mccourse:netherite_helmet",
+    "mccourse:netherite_chestplate",
+    "mccourse:netherite_leggings",
+    "mccourse:netherite_boots",
+    "mccourse:helmet_not_found",
+    "mccourse:chestplate_not_found",
+    "mccourse:leggings_not_found",
+    "mccourse:boots_not_found"
+  ]
+}

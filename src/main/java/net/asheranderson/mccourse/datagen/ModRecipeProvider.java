@@ -1,5 +1,6 @@
 package net.asheranderson.mccourse.datagen;
 
+import net.asheranderson.mccourse.MCCourseMod;
 import net.asheranderson.mccourse.block.ModBlocks;
 import net.asheranderson.mccourse.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -10,6 +11,8 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
+
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -68,14 +71,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.UNSTABLE_SOUL_GEM, RecipeCategory.BUILDING_BLOCKS, ModBlocks.UNSTABLE_SOUL_GEM_BLOCK);
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.SOULSTEEL, RecipeCategory.BUILDING_BLOCKS, ModBlocks.SOULSTEEL_BLOCK);
         offerReversibleCompactingRecipes(exporter, RecipeCategory.BUILDING_BLOCKS, ModItems.UNSTABLE_SOULSTEEL, RecipeCategory.BUILDING_BLOCKS, ModBlocks.UNSTABLE_SOULSTEEL_BLOCK);
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.AMBER_WARHAMMER)
-                .pattern("ABA")
-                .pattern(" A ")
-                .pattern(" A ")
-                .input('A', ModBlocks.AMBER)
-                .input('B', ModBlocks.BISMUTH_BLOCK)
-                .criterion(hasItem(ModBlocks.BISMUTH_BLOCK), conditionsFromItem(ModBlocks.BISMUTH_BLOCK))
-                .offerTo(exporter);
         ShapedRecipeJsonBuilder.create(RecipeCategory.FOOD, ModItems.AMETHYST_SOUL_BERRY)
                 .pattern("AAA")
                 .pattern("ABA")
@@ -142,8 +137,23 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         createHoeRecipe(ModItems.AMBER_HOE, ModBlocks.AMBER).offerTo(exporter);
         createHoeRecipe(ModItems.ADAMANT_HOE, ModItems.ADAMANT).offerTo(exporter);
         createHoeRecipe(ModItems.AETHERITE_HOE, ModItems.AETHERITE).offerTo(exporter);
+        createWarhammerRecipe(ModItems.AMBER_WARHAMMER, ModBlocks.AMBER).offerTo(exporter);
+        createHelmetRecipe(ModItems.NETHERITE_HELMET, ModItems.NETHERITE).offerTo(exporter);
+        createChestplateRecipe(ModItems.NETHERITE_CHESTPLATE, ModItems.NETHERITE).offerTo(exporter);
+        createLeggingsRecipe(ModItems.NETHERITE_LEGGINGS, ModItems.NETHERITE).offerTo(exporter);
+        createBootsRecipe(ModItems.NETHERITE_BOOTS, ModItems.NETHERITE).offerTo(exporter);
+        createHorseArmourRecipe(ModItems.NETHERITE_HORSE_ARMOR, ModItems.NETHERITE).offerTo(exporter);
+        offerSmithingTrimRecipe(exporter, ModItems.FIRE_SMITHING_TEMPLATE, Identifier.of(MCCourseMod.MOD_ID, "fire"));
 
         }
+    private static ShapedRecipeJsonBuilder createHorseArmourRecipe(ItemConvertible output, ItemConvertible a) {
+        return ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, output)
+                .pattern("  A")
+                .pattern("AAA")
+                .pattern("A A")
+                .input('A', a)
+                .criterion(hasItem(a), conditionsFromItem(a));
+    }
         private static ShapedRecipeJsonBuilder createSwordRecipe(ItemConvertible output, ItemConvertible a) {
             return ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, output)
                     .pattern(" A ")
@@ -188,5 +198,46 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                     .input('A', a)
                     .input('B', Items.STICK)
                     .criterion(hasItem(a), conditionsFromItem(a));
+    }
+    private static ShapedRecipeJsonBuilder createWarhammerRecipe(ItemConvertible output, ItemConvertible a) {
+        return  ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, output)
+                .pattern("ABA")
+                .pattern(" A ")
+                .pattern(" A ")
+                .input('A', a)
+                .input('B', ModBlocks.BISMUTH_BLOCK)
+                .criterion(hasItem(a), conditionsFromItem(a));
+    }
+    private static ShapedRecipeJsonBuilder createHelmetRecipe(ItemConvertible output, ItemConvertible a) {
+        return  ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, output)
+                .pattern("AAA")
+                .pattern("A A")
+                .pattern("   ")
+                .input('A', a)
+                .criterion(hasItem(a), conditionsFromItem(a));
+    }
+    private static ShapedRecipeJsonBuilder createChestplateRecipe(ItemConvertible output, ItemConvertible a) {
+        return  ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, output)
+                .pattern("A A")
+                .pattern("AAA")
+                .pattern("AAA")
+                .input('A', a)
+                .criterion(hasItem(a), conditionsFromItem(a));
+    }
+    private static ShapedRecipeJsonBuilder createLeggingsRecipe(ItemConvertible output, ItemConvertible a) {
+        return  ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, output)
+                .pattern("AAA")
+                .pattern("A A")
+                .pattern("A A")
+                .input('A', a)
+                .criterion(hasItem(a), conditionsFromItem(a));
+    }
+    private static ShapedRecipeJsonBuilder createBootsRecipe(ItemConvertible output, ItemConvertible a) {
+        return  ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, output)
+                .pattern("A A")
+                .pattern("A A")
+                .pattern("   ")
+                .input('A', a)
+                .criterion(hasItem(a), conditionsFromItem(a));
     }
 }

@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#mccourse:multitool_mineable",
+    "minecraft:bedrock",
+    "minecraft:barrier",
+    "minecraft:command_block",
+    "minecraft:water",
+    "minecraft:lava",
+    "minecraft:void_air"
+  ]
+}

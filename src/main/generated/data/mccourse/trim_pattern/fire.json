@@ -1,0 +1,8 @@
+{
+  "asset_id": "mccourse:fire",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.mccourse.fire"
+  },
+  "template_item": "mccourse:fire_armor_trim_smithing_template"
+}

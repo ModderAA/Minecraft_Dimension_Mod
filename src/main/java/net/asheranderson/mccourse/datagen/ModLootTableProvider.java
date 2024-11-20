@@ -1,10 +1,18 @@
 package net.asheranderson.mccourse.datagen;
 
 import net.asheranderson.mccourse.block.ModBlocks;
+import net.asheranderson.mccourse.block.custom.FlamerootCropBlock;
 import net.asheranderson.mccourse.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.BeetrootsBlock;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.CropBlock;
+import net.minecraft.item.Items;
+import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
+import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.predicate.StatePredicate;
 import net.minecraft.registry.RegistryWrapper;
 
 import java.util.concurrent.CompletableFuture;
@@ -77,5 +85,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
                 addDrop(ModBlocks.UNSTABLE_SOULITE_DOOR, doorDrops(ModBlocks.UNSTABLE_SOULITE_DOOR));
                 addDrop(ModBlocks.SOULITE_TRAPDOOR);
                 addDrop(ModBlocks.UNSTABLE_SOULITE_TRAPDOOR);
+                LootCondition.Builder builder = BlockStatePropertyLootCondition.builder(ModBlocks.FLAMEROOT_CROP)
+                .properties(StatePredicate.Builder.create().exactMatch(FlamerootCropBlock.AGE, 6));
+                this.addDrop(ModBlocks.FLAMEROOT_CROP, this.cropDrops(ModBlocks.FLAMEROOT_CROP, ModItems.FLAMEROOT, ModItems.FLAMEROOT_SEEDS, builder));
     }
 }

@@ -91,5 +91,18 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.AMBER_SHOVEL)
                 .add(ModItems.ADAMANT_SHOVEL)
                 .add(ModItems.AETHERITE_SHOVEL);
+        getOrCreateTagBuilder(ItemTags.TRIMMABLE_ARMOR)
+                .add(ModItems.NETHERITE_HELMET)
+                .add(ModItems.NETHERITE_CHESTPLATE)
+                .add(ModItems.NETHERITE_LEGGINGS)
+                .add(ModItems.NETHERITE_BOOTS)
+                .add(ModItems.HELMET_NOT_FOUND)
+                .add(ModItems.CHESTPLATE_NOT_FOUND)
+                .add(ModItems.LEGGINGS_NOT_FOUND)
+                .add(ModItems.BOOTS_NOT_FOUND);
+        getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS)
+                .add(ModItems.NETHERITE);
+        getOrCreateTagBuilder(ItemTags.TRIM_TEMPLATES)
+                .add(ModItems.FIRE_SMITHING_TEMPLATE);
     }
 }

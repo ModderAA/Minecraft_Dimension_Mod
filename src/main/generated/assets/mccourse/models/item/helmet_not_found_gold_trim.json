@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mccourse:item/helmet_not_found",
+    "layer1": "minecraft:trims/items/helmet_trim_gold"
+  }
+}
